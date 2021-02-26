@@ -20,15 +20,15 @@ class Background extends StatelessWidget {
         ]),
       ),
       child: Stack(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.center,
         children: <Widget>[
           Container(
-            height: size.height * 0.6,
+            height: size.height * 0.85,
+            width: size.width * 0.95,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60),
-                topRight: Radius.circular(60),
+              borderRadius: BorderRadius.all(
+                Radius.circular(40),
               ),
             ),
           ),

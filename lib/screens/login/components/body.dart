@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_kepatuhan_pg/components/rounded_button.dart';
 import 'package:flutter_kepatuhan_pg/components/rounded_input_field.dart';
 import 'package:flutter_kepatuhan_pg/components/rounded_password_field.dart';
+import 'package:flutter_kepatuhan_pg/screens/home/home_screen.dart';
 import './background.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,15 +19,16 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: size.height * 0.1),
             // Logo Petrokimia
             Positioned(
               top: size.height * 0.03,
               child: SvgPicture.asset(
                 "assets/images/Petrokimia_Gresik_logo.svg",
-                width: size.width * 0.5,
+                width: size.width * 0.6,
               ),
             ),
-            SizedBox(height: size.height * 0.12),
+            SizedBox(height: size.height * 0.1),
             // Big Text Login Title
             Text(
               "Login - Pernyataan Kepatuhan",
@@ -57,7 +59,16 @@ class Body extends StatelessWidget {
             // Login Button
             RoundedButton(
               text: "Login",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HomeScreen();
+                    },
+                  ),
+                );
+              },
             ),
             SizedBox(height: size.height * 0.05)
           ],
