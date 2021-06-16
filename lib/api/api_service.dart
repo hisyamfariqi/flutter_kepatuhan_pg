@@ -4,11 +4,13 @@ import 'dart:convert';
 
 class APIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
-    String url = "https://reqres.in/api/login";
-    // String url = "http://localhost:3000/getdata";
+    String url =
+        "https://reqres.in/api/login"; //iki ngkok jadikno comment pas ngetes nak api mu
+    // String url = "http://localhost:3000/getuser";
 
     final response = await http.post(url, body: requestModel.toJson());
-    print(requestModel.email);
+    print(requestModel.email); //iki ngkok jadikno comment pas ngetes nak api mu
+    // print(requestModel.username);
     print(requestModel.password);
     print(requestModel.toJson());
     if (response.statusCode == 200 || response.statusCode == 400) {
