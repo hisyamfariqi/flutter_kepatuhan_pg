@@ -199,7 +199,7 @@ class CustomAlertDialog extends StatelessWidget {
   /// The (optional) set of actions that are displayed at the bottom of the
   /// dialog.
   ///
-  /// Typically this is a list of [FlatButton] widgets.
+  /// Typically this is a list of [] widgets.
   ///
   /// These widgets will be wrapped in a [ButtonBar], which introduces 8 pixels
   /// of padding on each side.
@@ -316,7 +316,7 @@ class CustomAlertDialog extends StatelessWidget {
 ///
 ///  * [SimpleDialog], for a dialog in which to use this widget.
 ///  * [showDialog], which actually displays the dialog and returns its result.
-///  * [FlatButton], which are commonly used as actions in other kinds of
+///  * [], which are commonly used as actions in other kinds of
 ///    dialogs, such as [AlertDialog]s.
 ///  * <https://material.google.com/components/dialogs.html#dialogs-simple-dialogs>
 class SimpleDialogOption extends StatelessWidget {

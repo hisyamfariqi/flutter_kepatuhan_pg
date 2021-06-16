@@ -21,7 +21,7 @@ class User {
   }
 
   static Future<User> connectToAPI(String id) async {
-    String apiURL = "http://localhost:3000/getuser";
+    String apiURL = "http://10.0.2.2:3000/getuser";
 
     var apiResult = await http.get(apiURL);
     var jsonObject = json.decode(apiResult.body);

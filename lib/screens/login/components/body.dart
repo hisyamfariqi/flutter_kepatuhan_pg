@@ -81,12 +81,12 @@ class _BodyState extends State<Body> {
                       left: 20,
                     ),
                     child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       onSaved: (input) {
-                        loginRequestModel.email = input;
-                        print(loginRequestModel.email);
+                        loginRequestModel.username = input;
+                        print(loginRequestModel.username);
                       },
-                      validator: (input) => !input.contains('@')
+                      validator: (input) => input.length < 1
                           ? "Username should not be empty"
                           : null,
                       decoration: InputDecoration(
