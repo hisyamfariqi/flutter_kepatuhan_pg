@@ -67,7 +67,7 @@ class BodyState extends State<Body> {
 
   Future<String> getKaryawan() async {
     var response = await http.get(
-      Uri.encodeFull("http://localhost:3000/getkaryawan"),
+      Uri.encodeFull("http://10.0.2.2:3000/getkaryawan"),
     );
     this.setState(() {
       karyawan = jsonDecode(response.body);
@@ -82,10 +82,11 @@ class BodyState extends State<Body> {
 
   Future<String> getJawaban() async {
     var response = await http.get(
-      Uri.encodeFull("http://localhost:3000/getjawaban"),
+      Uri.encodeFull("http://10.0.2.2:3000/getjawaban"),
     );
     this.setState(() {
       jawaban = jsonDecode(response.body);
+      print(jawaban);
       isLoading = false;
       if (jawaban.length == 0) {
         emptyData = true;
@@ -97,10 +98,11 @@ class BodyState extends State<Body> {
 
   Future<String> getPertanyaan() async {
     var response = await http.get(
-      Uri.encodeFull("http://localhost:3000/getpertanyaan"),
+      Uri.encodeFull("http://10.0.2.2:3000/getpertanyaan"),
     );
     this.setState(() {
       pertanyaan = jsonDecode(response.body);
+      print(pertanyaan);
       isLoading = false;
       if (pertanyaan.length == 0) {
         emptyData = true;
@@ -158,13 +160,17 @@ class BodyState extends State<Body> {
   }
 
   Widget textPertanyaan(int index, int periode) {
-    if (pertanyaan.isNotEmpty) {
+    print("masuk textPertanyaan");
+    if (emptyData == false) {
       if (periode != 0) {
+        print(pertanyaan);
         setState(() {
+          print("masukk if where");
           pertanyaans = pertanyaan
               .where((element) => element["Periode"] == periode)
               .toList();
           this.idPertanyaan = pertanyaans[index]["Id"];
+          print(idPertanyaan);
         });
         return Text(
             (index + 1).toString() + ". " + pertanyaans[index]["Pertanyaan"]);
@@ -177,7 +183,7 @@ class BodyState extends State<Body> {
   }
 
   Widget textJawaban(int index, int idPertanyaan) {
-    if (jawaban.isNotEmpty) {
+    if (emptyData == false) {
       if (idPertanyaan != 0) {
         setState(() {
           jawabans = jawaban
@@ -237,7 +243,7 @@ class BodyState extends State<Body> {
   }
 
   Future<HasilJawabanModel> submitHasil() async {
-    final String url = "http://localhost:3000/hasilJawaban";
+    final String url = "http://10.0.2.2:3000/hasilJawaban";
     final response = await http.post(url, body: jsonEncode(hasilModel));
 
     if (response.statusCode == 200) {
@@ -255,13 +261,16 @@ class BodyState extends State<Body> {
       // Here you can write your code
       emptyData = false;
       this.getKaryawan();
-      this.periode = karyawan[0]["Periode"];
-      this.nik = karyawan[0]["NIK"];
+      // this.periode = karyawan[0]["Periode"];
       this.getPertanyaan();
       this.getJawaban();
       questionnareDialog();
+      print("$periode + $nik");
       setState(() {
         // Here you can write your code for open new view
+
+        this.periode = 1;
+        this.nik = "1";
       });
     });
     super.initState();

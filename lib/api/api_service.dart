@@ -14,9 +14,11 @@ class APIService {
     print(requestModel.username);
     print(requestModel.password);
     print(requestModel.toJson());
+    print(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
       print(response.statusCode);
       var jsonResponse = json.decode(response.body);
+      print(jsonResponse[0]);
       return LoginResponseModel.fromJson(jsonResponse[0]);
       // return LoginResponseModel.fromJson(
       //   json.decode(response.body),

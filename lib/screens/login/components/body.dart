@@ -177,11 +177,15 @@ class _BodyState extends State<Body> {
                               ),
                             );
                           } else {
+                            print("Error iki");
                             print(value.error);
                             final snackBar =
                                 SnackBar(content: Text(value.error));
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  return HomeScreen();
+                                }));
                           }
                         });
                       }
