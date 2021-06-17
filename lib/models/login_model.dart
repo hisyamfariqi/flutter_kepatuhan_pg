@@ -32,7 +32,5 @@ class LoginRequestModel {
       'Username': username.trim(),
       'Password': password.trim(),
     };
-
-    return map;
   }
 }
