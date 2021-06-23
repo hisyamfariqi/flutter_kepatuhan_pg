@@ -152,42 +152,46 @@ class _BodyState extends State<Body> {
                     press: () {
                       if (validateAndSave()) {
                         print(loginRequestModel.toJson());
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return HomeScreen();
+                        }));
 
-                        setState(() {
-                          isApiCallProcess = true;
-                        });
+                        // setState(() {
+                        //   isApiCallProcess = true;
+                        // });
 
-                        APIService apiService = APIService();
-                        apiService.login(loginRequestModel).then((value) {
-                          setState(() {
-                            isApiCallProcess = false;
-                          });
+                        // APIService apiService = APIService();
+                        // apiService.login(loginRequestModel).then((value) {
+                        //   setState(() {
+                        //     isApiCallProcess = false;
+                        //   });
 
-                          if (value.token.isNotEmpty) {
-                            final snackBar =
-                                SnackBar(content: Text("Login Success"));
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return HomeScreen();
-                                },
-                              ),
-                            );
-                          } else {
-                            print("Error iki");
-                            print(value.error);
-                            final snackBar =
-                                SnackBar(content: Text(value.error));
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return HomeScreen();
-                                }));
-                          }
-                        });
+                        //   if (value.token.isNotEmpty) {
+                        //     final snackBar =
+                        //         SnackBar(content: Text("Login Success"));
+                        //     ScaffoldMessenger.of(context)
+                        //         .showSnackBar(snackBar);
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) {
+                        //           return HomeScreen();
+                        //         },
+                        //       ),
+                        //     );
+                        //   } else {
+                        //     print("Error iki");
+                        //     print(value.error);
+                        //     final snackBar =
+                        //         SnackBar(content: Text(value.error));
+                        //     ScaffoldMessenger.of(context)
+                        //         .showSnackBar(snackBar);
+                        //         Navigator.push(context, MaterialPageRoute(builder: (context){
+                        //           return HomeScreen();
+                        //         }));
+                        //   }
+                        // });
                       }
                     },
                   ),

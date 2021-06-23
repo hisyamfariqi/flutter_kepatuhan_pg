@@ -21,114 +21,181 @@ class BodyState extends State<Body> {
   int idPertanyaan = 0, periode = 0;
   String nik = "";
   List data;
-  List pertanyaan, jawaban, karyawan;
-  List pertanyaans = [], jawabans = [];
+  // List pertanyaan, jawaban, karyawan;
+  // List pertanyaans = [], jawabans = [];
   var isLoading = true, emptyData;
   bool checkBox = false;
 
-  List<HasilJawabanModel> hasilModel = [
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
-    HasilJawabanModel(
-        nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  List karyawan = [
+    {
+      'NIK': '3571239201928',
+      'NIK_SAP': '3571239201928',
+      'Nama': 'Reza Zulfikarsyah',
+      'Jabatan': 'Peserta Magang',
+      'Tgl_Lahir': '2000-07-14',
+      'Unit_Kerja': 'Programmer',
+      'Nama_unit': 'Programmer Magang',
+      'Departemen': 'IT',
+    },
+    {
+      'NIK': '3571239201009',
+      'NIK_SAP': '3571239201009',
+      'Nama': 'Hisyam Fariqi',
+      'Jabatan': 'Peserta Magang',
+      'Tgl_Lahir': '2000-07-14',
+      'Unit_Kerja': 'Programmer',
+      'Nama_unit': 'Programmer Magang',
+      'Departemen': 'IT',
+    },
   ];
 
-  // Map hasilJawaban = {
-  //   "1": null,
-  //   "2": null,
-  //   "3": null,
-  //   "4": null,
-  //   "5": null,
-  //   "6": null,
-  //   "7": null,
-  //   "8": null,
-  //   "9": null,
-  //   "10": null,
-  //   "11": null
-  // };
+  List pertanyaan = [
+    {
+      'IdPertanyaan': 1,
+      'Periode': 1,
+      'Pertanyaan':
+          'Apakah Anda mengetahui tentang Sistem Manajemen Anti Penyuapan (SMAP) di PT Petrokimia Gresik?'
+    },
+    {
+      'IdPertanyaan': 2,
+      'Periode': 1,
+      'Pertanyaan':
+          'Apakah Anda mengetahui tentang prinsip 4 NO dalam Sistem Manajemen Anti Penyuapan (SMAP)?'
+    },
+    {
+      'IdPertanyaan': 3,
+      'Periode': 1,
+      'Pertanyaan':
+          'Apakah Anda mengetahui Whistle Blowing System (WBS) PT Petrokimia Gresik?'
+    },
+    {
+      'IdPertanyaan': 4,
+      'Periode': 1,
+      'Pertanyaan':
+          'Apakah pengelolaan WBS PT Petrokimia Gresik sudah berjalan sesuai harapan Anda?'
+    },
+    {
+      'IdPertanyaan': 5,
+      'Periode': 1,
+      'Pertanyaan':
+          'Apakah penting WBS dikelola oleh Pihak Ketiga untuk meningkatkan independensi dan transparansi?'
+    },
+    {
+      'IdPertanyaan': 6,
+      'Periode': 1,
+      'Pertanyaan':
+          'Apakah Anda mengetahui tentang Gratifikasi yang dianggap suap?'
+    },
+    {
+      'IdPertanyaan': 7,
+      'Periode': 1,
+      'Pertanyaan':
+          'Apakah Anda pernah mendapatkan sosialisasi Anti Gratifikasi?'
+    },
+  ];
 
-  Future<String> getKaryawan() async {
-    var response = await http.get(
-      Uri.encodeFull("http://10.0.2.2:3000/getkaryawan"),
-    );
-    this.setState(() {
-      karyawan = jsonDecode(response.body);
-      isLoading = false;
-      if (karyawan.length == 0) {
-        emptyData = true;
-      } else {
-        emptyData = false;
-      }
-    });
-  }
+  // List<HasilJawabanModel> hasilModel = [
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  //   HasilJawabanModel(
+  //       nik: null, periode: null, idPertanyaan: null, jawaban: null),
+  // ];
 
-  Future<String> getJawaban() async {
-    var response = await http.get(
-      Uri.encodeFull("http://10.0.2.2:3000/getjawaban"),
-    );
-    this.setState(() {
-      jawaban = jsonDecode(response.body);
-      print(jawaban);
-      isLoading = false;
-      if (jawaban.length == 0) {
-        emptyData = true;
-      } else {
-        emptyData = false;
-      }
-    });
-  }
+  Map hasilJawaban = {
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null,
+    "6": null,
+    "7": null,
+  };
 
-  Future<String> getPertanyaan() async {
-    var response = await http.get(
-      Uri.encodeFull("http://10.0.2.2:3000/getpertanyaan"),
-    );
-    this.setState(() {
-      pertanyaan = jsonDecode(response.body);
-      print(pertanyaan);
-      isLoading = false;
-      if (pertanyaan.length == 0) {
-        emptyData = true;
-      } else {
-        emptyData = false;
-      }
-    });
-  }
+  // Future<String> getKaryawan() async {
+  //   var response = await http.get(
+  //     Uri.encodeFull("http://10.0.2.2:3000/getkaryawan"),
+  //   );
+  //   this.setState(() {
+  //     karyawan = jsonDecode(response.body);
+  //     isLoading = false;
+  //     if (karyawan.length == 0) {
+  //       emptyData = true;
+  //     } else {
+  //       emptyData = false;
+  //     }
+  //   });
+  // }
+
+  // Future<String> getJawaban() async {
+  //   var response = await http.get(
+  //     Uri.encodeFull("http://10.0.2.2:3000/getjawaban"),
+  //   );
+  //   this.setState(() {
+  //     jawaban = jsonDecode(response.body);
+  //     print(jawaban);
+  //     isLoading = false;
+  //     if (jawaban.length == 0) {
+  //       emptyData = true;
+  //     } else {
+  //       emptyData = false;
+  //     }
+  //   });
+  // }
+
+  // Future<String> getPertanyaan() async {
+  //   var response = await http.get(
+  //     Uri.encodeFull("http://10.0.2.2:3000/getpertanyaan"),
+  //   );
+  //   this.setState(() {
+  //     pertanyaan = jsonDecode(response.body);
+  //     print(pertanyaan);
+  //     isLoading = false;
+  //     if (pertanyaan.length == 0) {
+  //       emptyData = true;
+  //     } else {
+  //       emptyData = false;
+  //     }
+  //   });
+  // }
 
   Widget customRadio(int nomor) {
     return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: <Widget>[
           ListTile(
-            title: textJawaban(nomor, this.idPertanyaan),
+            // title: textJawaban(nomor, this.idPertanyaan),
+            title: Text('Ya'),
             leading: Radio(
-              value: textJawaban(nomor, idPertanyaan).toString(),
-              groupValue: hasilModel[nomor],
+              // value: textJawaban(nomor, idPertanyaan).toString(),
+              value: 1,
+              // groupValue: hasilModel[nomor],
+              groupValue: hasilJawaban[nomor + 1],
               onChanged: (var value) {
                 setState(() {
-                  // hasilJawaban[(nomor + 1).toString()] = value;
-                  hasilModel[nomor] = HasilJawabanModel(
-                      nik: this.nik,
-                      periode: this.periode,
-                      idPertanyaan: this.idPertanyaan,
-                      jawaban: value);
+                  hasilJawaban[(nomor + 1).toString()] = value;
+                  // hasilModel[nomor] = HasilJawabanModel(
+                  //     nik: this.nik,
+                  //     periode: this.periode,
+                  //     idPertanyaan: this.idPertanyaan,
+                  //     jawaban: value);
 
                   // print(_answer);
                 });
@@ -136,18 +203,21 @@ class BodyState extends State<Body> {
             ),
           ),
           ListTile(
-            title: textJawaban(nomor + 1, this.idPertanyaan),
+            // title: textJawaban(nomor + 1, this.idPertanyaan),
+            title: Text('Tidak'),
             leading: Radio(
-              value: textJawaban(nomor + 1, idPertanyaan).toString(),
-              groupValue: hasilModel[nomor],
+              // value: textJawaban(nomor + 1, idPertanyaan).toString(),
+              value: 0,
+              // groupValue: hasilModel[nomor],
+              groupValue: hasilJawaban[nomor + 1],
               onChanged: (var value) {
                 setState(() {
-                  // hasilJawaban[(nomor + 1).toString()] = value;
-                  hasilModel[nomor] = HasilJawabanModel(
-                      nik: this.nik,
-                      periode: this.periode,
-                      idPertanyaan: this.idPertanyaan,
-                      jawaban: value);
+                  hasilJawaban[(nomor + 1).toString()] = value;
+                  // hasilModel[nomor] = HasilJawabanModel(
+                  //     nik: this.nik,
+                  //     periode: this.periode,
+                  //     idPertanyaan: this.idPertanyaan,
+                  //     jawaban: value);
                   // jawaban[nomor.toString()] = _answer;
                   // print(_answer);
                 });
@@ -159,45 +229,45 @@ class BodyState extends State<Body> {
     });
   }
 
-  Widget textPertanyaan(int index, int periode) {
-    print("masuk textPertanyaan");
-    if (emptyData == false) {
-      if (periode != 0) {
-        print(pertanyaan);
-        setState(() {
-          print("masukk if where");
-          pertanyaans = pertanyaan
-              .where((element) => element["Periode"] == periode)
-              .toList();
-          this.idPertanyaan = pertanyaans[index]["Id"];
-          print(idPertanyaan);
-        });
-        return Text(
-            (index + 1).toString() + ". " + pertanyaans[index]["Pertanyaan"]);
-      } else {
-        return Text("No data");
-      }
-    } else {
-      return Text("No data");
-    }
-  }
+  // Widget textPertanyaan(int index, int periode) {
+  //   print("masuk textPertanyaan");
+  //   if (emptyData == false) {
+  //     if (periode != 0) {
+  //       print(pertanyaan);
+  //       setState(() {
+  //         print("masukk if where");
+  //         pertanyaans = pertanyaan
+  //             .where((element) => element["Periode"] == periode)
+  //             .toList();
+  //         this.idPertanyaan = pertanyaans[index]["Id"];
+  //         print(idPertanyaan);
+  //       });
+  //       return Text(
+  //           (index + 1).toString() + ". " + pertanyaans[index]["Pertanyaan"]);
+  //     } else {
+  //       return Text("No data");
+  //     }
+  //   } else {
+  //     return Text("No data");
+  //   }
+  // }
 
-  Widget textJawaban(int index, int idPertanyaan) {
-    if (emptyData == false) {
-      if (idPertanyaan != 0) {
-        setState(() {
-          jawabans = jawaban
-              .where((element) => element["IdPertanyaan"] == idPertanyaan)
-              .toList();
-        });
-        return Text(jawabans[index]["Jawaban"]);
-      } else {
-        return Text("No data");
-      }
-    } else {
-      return Text("No data");
-    }
-  }
+  // Widget textJawaban(int index, int idPertanyaan) {
+  //   if (emptyData == false) {
+  //     if (idPertanyaan != 0) {
+  //       setState(() {
+  //         jawabans = jawaban
+  //             .where((element) => element["IdPertanyaan"] == idPertanyaan)
+  //             .toList();
+  //       });
+  //       return Text(jawabans[index]["Jawaban"]);
+  //     } else {
+  //       return Text("No data");
+  //     }
+  //   } else {
+  //     return Text("No data");
+  //   }
+  // }
 
   questionnareDialog() {
     // int radioValue;
@@ -217,7 +287,10 @@ class BodyState extends State<Body> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        textPertanyaan(index, this.periode),
+                        Text((index + 1).toString() +
+                            ". " +
+                            pertanyaan[index]["Pertanyaan"]),
+                        // textPertanyaan(index, this.periode),
                         customRadio(index),
                         SizedBox(
                           height: 10,
@@ -231,8 +304,8 @@ class BodyState extends State<Body> {
                   elevation: 5.0,
                   child: Text("Submit"),
                   onPressed: () {
-                    // print(hasilJawaban);
-                    submitHasil();
+                    print(hasilJawaban);
+                    // submitHasil();
                     Navigator.of(context).pop();
                   }),
             ],
@@ -242,28 +315,28 @@ class BodyState extends State<Body> {
     );
   }
 
-  Future<HasilJawabanModel> submitHasil() async {
-    final String url = "http://10.0.2.2:3000/hasilJawaban";
-    final response = await http.post(url, body: jsonEncode(hasilModel));
+  // Future<HasilJawabanModel> submitHasil() async {
+  //   final String url = "http://10.0.2.2:3000/hasilJawaban";
+  //   final response = await http.post(url, body: jsonEncode(hasilModel));
 
-    if (response.statusCode == 200) {
-      print(response.body);
-      return hasilJawabanModelFromJson(response.body);
-    } else {
-      print("Failed to post");
-      return null;
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     print(response.body);
+  //     return hasilJawabanModelFromJson(response.body);
+  //   } else {
+  //     print("Failed to post");
+  //     return null;
+  //   }
+  // }
 
   @override
   void initState() {
     Future.delayed(const Duration(milliseconds: 100), () {
       // Here you can write your code
       emptyData = false;
-      this.getKaryawan();
+      // this.getKaryawan();
       // this.periode = karyawan[0]["Periode"];
-      this.getPertanyaan();
-      this.getJawaban();
+      // this.getPertanyaan();
+      // this.getJawaban();
       questionnareDialog();
       print("$periode + $nik");
       setState(() {
@@ -313,11 +386,11 @@ class BodyState extends State<Body> {
                       width: 10),
                   InformationRow(
                       text: "Unit Kerja",
-                      formText: karyawan[0]["UNITKERJA"],
+                      formText: karyawan[0]["Unit_Kerja"],
                       width: 10),
                   InformationRow(
                       text: "Jabatan",
-                      formText: karyawan[0]["JABATAN"],
+                      formText: karyawan[0]["Jabatan"],
                       width: 10),
                   Text("Dengan ini menyatakan: ",
                       style: TextStyle(fontSize: 12)),
